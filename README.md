@@ -14,7 +14,7 @@ Certs are stored on the server. Docker image is run with the following command:
 ```  
 docker run -d -p 80:80   
               -p 443:443   
-              -v $(pwd)/em3/certs:/etc/apache2/ssl   
-              -v $(pwd)/em3/conf/app_conf.conf:/etc/apache2/sites-available/app_conf.conf   
+              -v $(pwd)/flask_app/certs:/etc/apache2/ssl   
+              -v $(pwd)/flask_app/conf/app_conf.conf:/etc/apache2/sites-available/flask_app.conf   
               --name <name> <image_name>  
 ```
