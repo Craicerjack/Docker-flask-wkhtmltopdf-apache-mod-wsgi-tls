@@ -29,12 +29,12 @@ RUN apt-get update && apt-get install -y apache2 \
  && apt-get autoremove \
  && rm -rf /var/lib/apt/lists/*
 # Copy over flask requirements and install them
-COPY em3/requirements.txt /var/www/em3/requirements.txt
-RUN pip install -r /var/www/em3/requirements.txt
+COPY flask_app/requirements.txt /var/www/flask_app/requirements.txt
+RUN pip install -r /var/www/flask_app/requirements.txt
 # Copy over the conf file for the app (though the tls conf file is loaded as a volume at runtime)
-COPY ./gemscomplete.conf /etc/apache2/sites-available/gemscomplete.conf
+COPY ./flask_app.conf /etc/apache2/sites-available/flask_app.conf
 # Enable the conf. I know this is old apache but get what you know working first 
-RUN a2dissite 000-default.conf && a2ensite gemscomplete.conf \
+RUN a2dissite 000-default.conf && a2ensite flask_app.conf \
     && a2enmod headers \
     && a2enmod ssl
 # I was having OS permissions errors for the tmp files that wkhtmltopdf was creating. I know this isnt ideal but I needed it working
@@ -43,7 +43,7 @@ RUN chown -R www-data:root /usr/local/lib/python2.7/dist-packages
 
 # Set up the ember app.
 FROM debian:latest as app
-COPY ./em3 /var/www/em3
+COPY ./flask_app /var/www/flask_app
 COPY ./client/dist /var/www/html/
 
 
