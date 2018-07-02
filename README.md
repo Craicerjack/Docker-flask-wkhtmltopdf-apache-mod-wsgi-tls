@@ -8,7 +8,8 @@ A couple of things:
  * This isnt ideal. Its still quite a big image
  * This isnt the latest version of apache or its config
  * The ownership as it is down isnt ideal
- * ...but it works. 
+ * ...but it works.  
+ * If I figured out the `users` it would probably go a long way to solving my problems.  
 
 Certs are stored on the server. Docker image is run with the following command:  
 ```  
